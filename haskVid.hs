@@ -5,6 +5,12 @@ import Control.Monad
 formats :: [String]
 formats = ["mp4","m4v","ogv","webm"]
 
+-- get files in current Dir
+c <- getCurrentDirectory
+f <- getDirectoryContents c
+
+-- Iterate through MOV files in current dir
+
 main :: IO ()
 main = do
 	putStrLn "Input File: "
@@ -14,10 +20,7 @@ main = do
 	return ()
 
 split s d = takeWhile (\x -> x/= d) s
-split' d = takeWhile (\x -> x/= d)
 
 ffmpeg' s ext = "ffmpeg -i " ++ s ++ " " ++ out
 		where
 			out = split s '.' ++ "." ++ ext
-
-getDirContents dir = getDirectoryContents dir 
