@@ -2,17 +2,17 @@
 import System.Process
 import System.Directory
 import Control.Monad
+import System.FilePath.Posix
 
 -- List of formats we will be creating
 formats :: [String]
 formats = ["mp4","m4v","ogv","webm"]
 
 -- get files in current Dir
-c <- getCurrentDirectory
-f <- getDirectoryContents c
+--c <- getCurrentDirectory
+--f <- getDirectoryContents c
 
 -- Iterate through MOV files in current dir. If file is not MOV skip it
-
 
 main :: IO ()
 main = do
@@ -23,9 +23,11 @@ main = do
 	return ()
 
 -- Takes the filename with extension and returns just the filename
-split s d = takeWhile (\x -> x/= d) s
+-- takeExtension "file.oof" == ".oof"
+-- takeBaseName "file.oof" == "file"
+--if (doesFileExist inputFile)
 
 -- Takes a file and creates the derivative in she specified format (ext) 
 ffmpeg' s ext = "ffmpeg -i " ++ s ++ " " ++ out
 		where
-			out = split s '.' ++ "." ++ ext
+			out = takeBaseName s ++ "." ++ ext
