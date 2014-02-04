@@ -8,14 +8,12 @@ import System.FilePath.Posix
 formats :: [String]
 formats = ["mp4","m4v","ogv","webm"]
 
--- get files in current Dir
---c <- getCurrentDirectory
---f <- getDirectoryContents c
-
 -- Iterate through MOV files in current dir. If file is not MOV skip it
 
 main :: IO ()
 main = do
+	c <- getCurrentDirectory
+	f <- getDirectoryContents c
 	putStrLn "Input File: "
   	inputFile <- getLine
 	let v = map (\x -> ffmpeg' inputFile x) formats 	
